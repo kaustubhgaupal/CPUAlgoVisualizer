@@ -1,6 +1,5 @@
 {
   "name": "cpuscheduler",
-  "homepage": "https://kaustubhgaupal.github.io/CPUScheduler/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
