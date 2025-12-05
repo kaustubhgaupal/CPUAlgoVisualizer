@@ -6,7 +6,16 @@ import fetch from "node-fetch";
 dotenv.config();
 
 const app = express();
-app.use(cors());
+
+app.use(cors({
+  origin: [
+    "https://cpu-algo-visualizer-c5b1.vercel.app", // Your deployed frontend
+    "http://localhost:5173"                          // Your local computer (for testing)
+  ],
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type"]
+}));
+
 app.use(express.json());
 
 app.post("/api/chat", async (req, res) => {
