@@ -23,15 +23,15 @@ app.use(express.json());
 app.post("/api/chat", async (req, res) => {
   const { question } = req.body;
   const prompt = `
-You are an expert CPU scheduling teacher.
-Explain things clearly: FCFS, SJF, Priority, Round Robin,
-Gantt chart, waiting time, turnaround time.
+You are a CPU Scheduling assistant.
+Keep your answers VERY short, concise, and direct (max 5 sentences).
+Avoid long introductions or conclusions. Use bullet points for lists.
 User: ${question}
 `;
 
   try {
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${process.env.GEMINI_API_KEY}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -42,7 +42,7 @@ User: ${question}
     );
 
     const data = await response.json();
-    console.log(data);
+    
     const answer = data?.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, try again.";
     
     res.json({ answer });
